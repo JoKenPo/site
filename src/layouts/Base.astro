@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { SOCIAL_LINKS, SITE_DESCRIPTION } from "../consts";
 
 export interface Props {
   title: string;
@@ -9,7 +10,7 @@ export interface Props {
 
 const {
   title,
-  description = "Blog e Projetos de Eduardo Almeida (jokenpo)",
+  description = SITE_DESCRIPTION,
   image = "/social.png",
 } = Astro.props;
 const siteUrl = Astro.site || "https://jokenpo.dev";
@@ -40,10 +41,10 @@ const siteUrl = Astro.site || "https://jokenpo.dev";
     <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
   <body
-    class="bg-[#fdfdfd] dark:bg-[#111111] text-[#1a1a1a] dark:text-[#e5e5e5] min-h-screen flex flex-col font-sans antialiased"
+    class="bg-site-bg dark:bg-site-bg-dark text-site-text dark:text-site-text-dark min-h-screen flex flex-col font-sans antialiased"
   >
     <div
-      class="w-full bg-[#f1f1f1] dark:bg-[#1a1a1a] border-b border-[#e2e2e2] dark:border-[#2a2a2a] mb-8"
+      class="w-full bg-site-surface dark:bg-site-surface-dark border-b border-site-border dark:border-site-border-dark mb-8"
     >
       <header
         class="max-w-[850px] mx-auto px-6 py-4 flex flex-wrap items-center justify-between"
@@ -87,20 +88,25 @@ const siteUrl = Astro.site || "https://jokenpo.dev";
     </main>
 
     <footer
-      class="max-w-[850px] w-full mx-auto px-6 mt-16 pt-8 pb-12 border-t border-[#e2e2e2] dark:border-[#2a2a2a] text-gray-500 dark:text-gray-400 text-sm flex flex-col gap-2"
+      class="max-w-[850px] w-full mx-auto px-6 mt-16 pt-8 pb-12 border-t border-site-border dark:border-site-border-dark text-gray-500 dark:text-gray-400 text-sm flex flex-col gap-2"
     >
       <div class="flex gap-4">
         <a
-          href="https://github.com/JoKenPo"
+          href={SOCIAL_LINKS.github}
           target="_blank"
           class="!no-underline hover:text-gray-800 dark:hover:text-gray-200 hover:underline"
           >GitHub</a
         >
         <a
-          href="https://www.linkedin.com/in/eduardo-florencio/"
+          href={SOCIAL_LINKS.linkedin}
           target="_blank"
           class="!no-underline hover:text-gray-800 dark:hover:text-gray-200 hover:underline"
           >LinkedIn</a
+        >
+        <a
+          href={`mailto:${SOCIAL_LINKS.email}`}
+          class="!no-underline hover:text-gray-800 dark:hover:text-gray-200 hover:underline"
+          >Email</a
         >
         <a
           href="/rss.xml"

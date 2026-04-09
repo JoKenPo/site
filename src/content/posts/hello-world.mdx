@@ -1,36 +1,18 @@
 ---
 title: "Meu primeiro post (Reboot do Site)"
-description: "Migração da plataforma para Astro e um novo layout inspirado no brutalismo minimalista."
+description: "Migração da plataforma para Astro, self-hosting no Raspberry Pi e deploy automatizado via GitHub Actions."
 date: 2026-04-08
-tags: ["tech", "astro", "frontend", "homelab"]
+tags: ["tech", "astro", "frontend", "homelab", "devops"]
 ---
 
 Bem vindo ao meu novo recanto na internet.
 
-Esse espaço foi reiniciado com o objetivo de focar na legibilidade clássica da web ("brutalismo") e em máxima eficiência para ser hospedado via NGINX em um Raspberry Pi. Inspirado pela fantástica [Xe Iaso](https://xeiaso.net/).
+Esse espaço foi reiniciado com o objetivo de focar na legibilidade clássica da web ("brutalismo") e em máxima eficiência para ser hospedado no meu **HomeLab** em um **Raspberry Pi**. Inspirado pela fantástica [Xe Iaso](https://xeiaso.net/).
+Nesses ultimos dias eu estou vidrado em **homelab**, então resolvi criar esse site para aprender mais sobre **self-hosting** e **devops**, mas tambem para compartilhar minhas experiências nessa saga.
 
-## Tecnologias Escolhidas
+## O que está rodando aqui
 
-Para não abandonar o ecossistema que uso profissionalmente, decidi usar o **Astro**. Além de suportar `.mdx`, ele consegue compilar para HTML puro, gerando 0 KB de JavaScript no cliente a menos que explícito. 
-
-```javascript
-// Exemplo de componente React que poderia ser inserido via MDX futuramente
-import React from 'react';
-
-export default function Counter() {
-  const [count, setCount] = React.useState(0);
-  return <button onClick={() => setCount(count + 1)}>{count}</button>;
-}
-```
-
-> **Nota:** Usando CSS puro garantimos que o navegador perca pouquíssimo tempo interpretando estilos gigantes. É só cor e tipografia em sua forma mais pura e robusta.
-
-## O que foi feito hoje
-- Removemos fontes customizadas pesadas para focar 100% em leitura brutalista, economizando megabytes de banda.
-- O site agora gera um [Feed RSS](/rss.xml) 100% funcional em tempo de compilação graças às Collections do Astro.
-- Dockerizamos a versão final com a imagem levinha do NGINX Alpine e pareamos com a imagem do **Cloudflare Tunnels**.
-- E o mais legal: subimos o blog **localmente em um Raspberry Pi 3** através de um SSD externo. Graças à engine _Zero Trust_ da Cloudflare, o tráfego do meu domínio bate seguro na porta da minha casa sem eu precisar abrir NENHUMA porta do roteador para a internet aberta!
-
-### Próximos Passos
-- Automatizar o Deploy via GitHub Actions direto para a rede do Pi.
-- Começar a escrever de fato e preencher esse espaço!
+- Dockerizei a versão final com a imagem levinha do **NGINX Alpine**, pareada com o **Cloudflare Tunnel** para exposição segura à internet.
+- O blog roda **localmente em um Raspberry Pi 3B** com um SSD externo. Graças à engine _Zero Trust_ da Cloudflare, o tráfego do meu domínio bate seguro na porta da minha casa sem eu precisar abrir **nenhuma** porta do roteador para a internet.
+- O deploy é **totalmente automatizado** via **GitHub Actions**: a cada `git push` na branch `master`, o site é compilado na nuvem do GitHub e sincronizado para o Raspberry Pi através de um túnel seguro da **Tailscale** usando `rsync` sobre SSH.
+- O site gera um [Feed RSS](/rss.xml) 100% funcional em tempo de compilação graças às Collections do Astro.
