@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("posts", ({ data }) => {
+  return data.draft !== true;
+});
+
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 8);
+---
+
+<Base title="jokenpo.dev - Home">
+  <section class="mt-4">
+    <h1>Eduardo Almeida</h1>
+    <p class="mb-6 text-[1.1rem] font-bold text-gray-700 dark:text-gray-300">
+      SS Software Engineer @ Mercado Livre - São Paulo, BRA
+    </p>
+
+    <div
+      class="border border-gray-200 dark:border-gray-800 bg-gray-100/50 dark:bg-[#1a1a1a] rounded-lg p-5 flex flex-row gap-5 items-center mb-12 shadow-sm"
+    >
+      <div
+        class="w-25 h-25 sm:w-36 sm:h-36 rounded-md overflow-hidden flex-shrink-0"
+      >
+        <img
+          src="/original_avatar.png"
+          alt="Foto do Eduardo Almeida, ele mesmo"
+          class="w-full h-full object-cover scale-[1.3] sm:scale-100 origin-top"
+        />
+      </div>
+      <div
+        class="text-gray-800 dark:text-gray-300 text-sm leading-[1.4] flex-1"
+      >
+        <p class="mb-1">
+          Apaixonado por Desenvolvimento <strong
+            class="text-gray-900 dark:text-gray-100 font-medium">WEB</strong
+          >
+          e <strong class="text-gray-900 dark:text-gray-100 font-medium"
+            >GEEK</strong
+          > nas horas vagas. Procurando sempre se desenvolver como programador e também
+          como pessoa. Trabalho com <strong
+            class="text-gray-900 dark:text-gray-100 font-medium"
+            >Engenheiro de Software a 15 anos</strong
+          > e com isso, experiencia em projetos relacionados a ecommerce, area financeira
+          e contabil, sistemas internos e integrações diversas. Meu interesse é em,
+          primeiro entender todo o problema e ai sim trabalhar na solução.
+        </p>
+        <p class="mb-0">
+          Sinta-se à vontade para entrar em contato comigo para tirar dúvidas,
+          pedir conselhos ou me ensinar algo! 😀
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Artigos Recentes</h2>
+    <ul class="list-disc pl-5 mb-8 space-y-2">
+      {
+        recentPosts.map((post) => {
+          const dateStr = post.data.date.toLocaleDateString("en-US", {
+            month: "2-digit",
+            day: "2-digit",
+            year: "numeric",
+          });
+          return (
+            <li class="mb-2 text-gray-700 dark:text-gray-400 marker:text-gray-400 sm:flex items-baseline">
+              <span class="font-bold font-mono text-[0.95rem] mr-2 text-gray-500 dark:text-gray-400 italic tracking-wide">
+                {dateStr}
+              </span>
+              <span class="hidden sm:inline-block mx-2">-</span>
+              <a
+                href={`/blog/${post.slug}`}
+                class="text-blue-700 hover:underline transition-colors dark:text-brand"
+              >
+                {post.data.title}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</Base>

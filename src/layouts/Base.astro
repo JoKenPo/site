@@ -1,0 +1,122 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = "Blog e Projetos de Eduardo Almeida (jokenpo)",
+  image = "/social.png",
+} = Astro.props;
+const siteUrl = Astro.site || "https://jokenpo.dev";
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, siteUrl)} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, siteUrl)} />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body
+    class="bg-[#fdfdfd] dark:bg-[#111111] text-[#1a1a1a] dark:text-[#e5e5e5] min-h-screen flex flex-col font-sans antialiased"
+  >
+    <div
+      class="w-full bg-[#f1f1f1] dark:bg-[#1a1a1a] border-b border-[#e2e2e2] dark:border-[#2a2a2a] mb-8"
+    >
+      <header
+        class="max-w-[850px] mx-auto px-6 py-4 flex flex-wrap items-center justify-between"
+      >
+        <nav class="flex flex-wrap items-center gap-6">
+          <a
+            href="/"
+            class="text-2xl font-serif text-gray-900 dark:text-brand hover:opacity-80 transition-opacity !no-underline flex items-center gap-2"
+          >
+            <img
+              src="/favicon.png"
+              alt="jokenpo logo"
+              class="w-8 h-8 object-contain"
+            />
+            <span
+              class="text-3xl text-gray-600 dark:text-gray-300 font-normal leading-none tracking-tight"
+              >jokenpo</span
+            >
+          </a>
+          <a
+            href="/blog"
+            class="text-[1.1rem] text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-white underline-offset-4 !no-underline"
+            >Blog</a
+          >
+          <a
+            href="/sobre"
+            class="text-[1.1rem] text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-white underline-offset-4 !no-underline"
+            >Sobre</a
+          >
+          <a
+            href="/projetos"
+            class="text-[1.1rem] text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-white underline-offset-4 !no-underline"
+            >Projetos</a
+          >
+        </nav>
+      </header>
+    </div>
+
+    <main class="max-w-[850px] w-full mx-auto px-6 flex-1">
+      <slot />
+    </main>
+
+    <footer
+      class="max-w-[850px] w-full mx-auto px-6 mt-16 pt-8 pb-12 border-t border-[#e2e2e2] dark:border-[#2a2a2a] text-gray-500 dark:text-gray-400 text-sm flex flex-col gap-2"
+    >
+      <div class="flex gap-4">
+        <a
+          href="https://github.com/JoKenPo"
+          target="_blank"
+          class="!no-underline hover:text-gray-800 dark:hover:text-gray-200 hover:underline"
+          >GitHub</a
+        >
+        <a
+          href="https://www.linkedin.com/in/eduardo-florencio/"
+          target="_blank"
+          class="!no-underline hover:text-gray-800 dark:hover:text-gray-200 hover:underline"
+          >LinkedIn</a
+        >
+        <a
+          href="/rss.xml"
+          class="!no-underline hover:text-gray-800 dark:hover:text-gray-200 hover:underline"
+          >RSS</a
+        >
+      </div>
+      <p>
+        Desenvolvido orgulhosamente com <a
+          href="https://astro.build"
+          target="_blank"
+          class="text-gray-900 dark:text-gray-300 !no-underline hover:underline"
+          >Astro</a
+        > e TailwindCSS. <br />
+        <strong>Self-hosted</strong> a partir de um Raspberry Pi 3 local.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand: #ffbd59;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono,
+    monospace;
+}
+
+@layer base {
+  a {
+    @apply text-blue-700 underline decoration-blue-700/30 underline-offset-[3px] transition-colors duration-200 hover:decoration-transparent dark:text-brand dark:decoration-brand/30 dark:hover:decoration-transparent;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold leading-tight mt-10 mb-5 text-gray-900 dark:text-gray-100;
+  }
+
+  h1 {
+    @apply text-3xl font-sans tracking-tight mt-0 mb-6;
+  }
+  h2 {
+    @apply text-xl font-sans tracking-tight border-b border-gray-200 dark:border-gray-800 pb-2 mb-4;
+  }
+  h3 {
+    @apply text-lg;
+  }
+
+  code {
+    @apply font-mono text-[0.9em] bg-gray-100 dark:bg-[#1e1e1e] border border-gray-200 dark:border-gray-800 rounded px-1.5 py-0.5;
+  }
+
+  pre {
+    @apply bg-gray-100 dark:bg-[#1e1e1e] border border-gray-200 dark:border-gray-800 rounded-lg p-4 overflow-x-auto text-[0.9em] mb-6;
+  }
+
+  pre code {
+    @apply bg-transparent p-0 border-none text-inherit;
+  }
+
+  hr {
+    @apply border-0 border-t border-dashed border-gray-300 dark:border-gray-700 my-8;
+  }
+
+  blockquote {
+    @apply my-6 px-4 py-2 border-l-4 border-blue-700 dark:border-brand bg-gray-50 dark:bg-[#1e1e1e] rounded-r-md italic text-gray-600 dark:text-gray-400;
+  }
+}
