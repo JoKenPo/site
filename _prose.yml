@@ -1,0 +1,65 @@
+# Configuração do Prose.io para o blog JoKenPo
+# Documentação: https://github.com/prose/prose/wiki/Prose-Configuration
+
+prose:
+  rooturl: "https://jokenpo.dev"
+  ignore:
+    - "*.json"
+    - "*.mjs"
+    - "*.ts"
+    - "*.toml"
+    - docker
+    - node_modules
+    - dist
+    - .github
+    - .astro
+
+  media: "public/images"
+
+  metadata:
+    "src/content/posts":
+      - name: "title"
+        field:
+          element: text
+          label: "Título"
+          placeholder: "Título do post"
+
+      - name: "description"
+        field:
+          element: textarea
+          label: "Descrição"
+          placeholder: "Breve descrição para o feed e SEO"
+
+      - name: "date"
+        field:
+          element: text
+          label: "Data"
+          placeholder: "YYYY-MM-DD"
+          value: "CURRENT_DATETIME"
+
+      - name: "tags"
+        field:
+          element: multiselect
+          label: "Tags"
+          placeholder: "Adicionar tag..."
+          options:
+            - name: "tech"
+              value: "tech"
+            - name: "homelab"
+              value: "homelab"
+            - name: "devops"
+              value: "devops"
+            - name: "frontend"
+              value: "frontend"
+            - name: "astro"
+              value: "astro"
+            - name: "linux"
+              value: "linux"
+            - name: "hardware"
+              value: "hardware"
+
+      - name: "draft"
+        field:
+          element: checkbox
+          label: "Rascunho"
+          value: false
