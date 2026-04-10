@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
+import { readingTime } from '../../utils/readingTime';
 
 const allPosts = await getCollection('posts', ({ data }) => {
   return data.draft !== true;
@@ -17,7 +18,7 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
     {posts.map((post) => (
       <li class="flex flex-col sm:flex-row sm:items-baseline sm:gap-6 mb-4 pb-4 border-b border-dashed border-gray-300 dark:border-gray-800 last:border-0 last:pb-0">
         <span class="font-mono text-[0.95rem] text-gray-500 dark:text-gray-500 italic tracking-wide whitespace-nowrap">
-          {post.data.date.toISOString().split('T')[0]}
+          {post.data.date.toISOString().split('T')[0]} · {readingTime(post.body).minutes} min
         </span>
         <a class="text-xl font-medium sm:text-[1.3rem] leading-tight flex-1 text-blue-700 hover:underline dark:text-brand" href={`/blog/${post.slug}`}>{post.data.title}</a>
       </li>
