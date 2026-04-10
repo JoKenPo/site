@@ -5,10 +5,14 @@ date: 2026-04-08
 tags: ["tech", "astro", "frontend", "homelab", "devops"]
 ---
 
-Bem vindo ao meu novo recanto na internet.
+Sempre consumi conteudo na internet, principalmente no YouTube, sobre projetos de makers e homelab. Por conta disso, nutri um interesse genuino de ter um homelab particular. As opções que tinham aqui no Brasil sempre foram muito caras, e por conta disso eu sempre adiava esse projeto.
+Até que recentemente encontrei um Raspberry Pi 3 no MercadoLivre por um preço muito bom, praticamente a metade do preço. Não perdi tempo, comprei e comecei a explorar ele já sem case e sem nada.
 
-Esse espaço foi reiniciado com o objetivo de focar na legibilidade clássica da web ("brutalismo") e em máxima eficiência para ser hospedado no meu **HomeLab** em um **Raspberry Pi**. Inspirado pela fantástica [Xe Iaso](https://xeiaso.net/).
-Nesses ultimos dias eu estou vidrado em **homelab**, então resolvi criar esse site para aprender mais sobre **self-hosting** e **devops**, mas tambem para compartilhar minhas experiências nessa saga.
+Hoje, um pouco mais de um mês depois, já tenho ele rodando com um SSD externo para mais armazenamento, agente de IA, API própia de LLMs, automações e inclusive com esse site rodando nele.
+
+Aproveitei esse novo hobby pra refazer e hospedar meu próprio site no meu servidorzinho pessoal. E então, esse espaço foi reiniciado, com legibilidade clássica da web ("brutalismo") e com o máximo de eficiência para ser hospedado no meu **HomeLab** no meu humilde Raspberry Pi com o objetivo de focar em conteúdo técnico, compartilhar conhecimento e principalmente: **brincar com meu homelab**. O site, a simplicidade e o desafio foi inspirado pela fantástica [Xe Iaso](https://xeiaso.net/).
+
+Agora um pouco mais sobre as tecnologias envolvidas:
 
 ## O que está rodando aqui
 
@@ -16,3 +20,9 @@ Nesses ultimos dias eu estou vidrado em **homelab**, então resolvi criar esse s
 - O blog roda **localmente em um Raspberry Pi 3B** com um SSD externo. Graças à engine _Zero Trust_ da Cloudflare, o tráfego do meu domínio bate seguro na porta da minha casa sem eu precisar abrir **nenhuma** porta do roteador para a internet.
 - O deploy é **totalmente automatizado** via **GitHub Actions**: a cada `git push` na branch `master`, o site é compilado na nuvem do GitHub e sincronizado para o Raspberry Pi através de um túnel seguro da **Tailscale** usando `rsync` sobre SSH.
 - O site gera um [Feed RSS](/rss.xml) 100% funcional em tempo de compilação graças às Collections do Astro.
+
+##  Proximos passos
+
+Vou tentar documentar minha evolução com meu homelab por aqui e tambem compartilhar pensamentos e experiências do mundo tech em geral, sem nenhuma pretensão.
+
+Muito obrigado por ler até aqui e por ser essa pessoal maravilhosa! 🦾
