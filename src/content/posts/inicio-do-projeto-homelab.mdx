@@ -1,0 +1,46 @@
+---
+title: "O Início do Meu Projeto Homelab"
+description: "Como um hardware limitado e um vídeo no YouTube me convenceram a montar um servidor caseiro."
+date: 2026-04-14
+tags: ["homelab", "raspberry-pi", "self-hosted", "rust"]
+heroImage: ""
+draft: true
+---
+
+Eu estava de bobeira no YouTube quando caí num vídeo de um cara montando um homelab minimalista. Ele usava um Raspberry Pi Zero 2W para bloquear anúncios na rede inteira, rodar uma VPN e acessar os arquivos de casa remotamente. A ideia me pegou na hora.
+
+Fui pesquisar o preço da placa e, por um golpe de sorte, encontrei um **Raspberry Pi 3 Model B** pelo mesmo valor — cerca de 50% abaixo do preço comum. Não pensei duas vezes.
+
+Desde então, o projeto virou um buraco sem fundo. Comecei a subir serviços, testar ferramentas e aprender muito mais do que eu esperava. Este post é sobre esse começo e o que é possível extrair de um hardware que muitos considerariam "ultrapassado".
+
+## O Desafio do Hardware Limitado
+
+O Pi 3 tem apenas 1GB de RAM. Esse detalhe define praticamente todas as decisões do projeto. Se você sai instalando qualquer serviço pesado, a placa engasga rápido.
+
+A regra aqui é clara: **tudo precisa ser leve**. Acabei priorizando ferramentas escritas em **Rust**. Não por *hype*, mas por necessidade absoluta: programas em Rust costumam ter um gerenciamento de memória muito mais eficiente para dispositivos de baixo recurso.
+
+## O Que Já Está Rodando
+
+### Infraestrutura e Rede
+Comecei pelo básico para sentir o impacto no dia a dia:
+
+*   **[Pi-hole](https://pi-hole.net/):** Funciona como o DNS da minha rede. Ele corta anúncios e rastreadores direto na origem, antes mesmo de chegarem no meu navegador ou aplicativos.
+*   **[Tailscale](https://tailscale.com/):** Uma VPN baseada em WireGuard que é ridícula de fácil de configurar. Com ela, acesso minha rede interna de qualquer lugar do mundo. Além disso, consigo usar o Pi-hole mesmo no 4G, roteando o tráfego do celular pela conexão de casa.
+
+### Inteligência Artificial Local
+Depois, resolvi arriscar algo mais complexo:
+
+*   **[ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw/):** Um fork do OpenClaw compilado em Rust. Escolhi ele especificamente pela limitação de memória. Ele roda como um agente no meu Telegram e me ajuda com resumos de notícias, automações e até debug de código.
+*   **Antigravity-Manager:** [LINK_AQUI] — Encontrei esse projeto num fórum do Reddit 🏴‍☠️. Ele gerencia múltiplas contas e as expõe como uma API única, o que me ajuda a diluir os custos de uso pesado de tokens.
+
+### Observabilidade e Site
+Para não navegar no escuro, precisava de métricas:
+
+*   **[Beszel](https://beszel.dev/):** De longe o monitor de sistemas mais leve e completo que testei. Consigo acompanhar CPU, temperatura e o comportamento individual de cada container em tempo real.
+*   **Nginx + Cloudflare Tunnel:** Uso essa combinação para hospedar meu próprio site ([JoKenPo/site](https://github.com/JoKenPo/site)) e outros serviços sem precisar abrir portas no roteador, o que mantém a rede de casa segura.
+
+## Vale a pena?
+
+Na prática, o consumo se estabilizou de forma surpreendente: o Pi-hole ocupa cerca de 50MB de RAM e o ZeroClaw, quando parado, leva apenas 30MB. 
+
+Hoje, esse computadorzinho que enfeita minha mesa é responsável por limpar minha internet, proteger minha conexão e hospedar meus projetos. Se você quer aprender sobre infraestrutura, Linux e ter controle total sobre seus dados, recomendo começar agora mesmo — mesmo que seja com aquela placa velha guardada na gaveta.

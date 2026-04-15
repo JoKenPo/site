@@ -40,7 +40,14 @@ export default {
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
         ],
-        serif: ["Georgia", "Cambria", '"Times New Roman"', "Times", "serif"],
+        serif: [
+          "JetBrains Mono",
+          "Georgia",
+          "Cambria",
+          '"Times New Roman"',
+          "Times",
+          "serif",
+        ],
         mono: [
           "ui-monospace",
           "SFMono-Regular",

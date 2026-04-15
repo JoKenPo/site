@@ -20,38 +20,36 @@ const { words, minutes } = readingTime(post.body);
   title={`${post.data.title} - jokenpo.dev`}
   description={post.data.description}
 >
-  <article class="w-full">
-    <header class="mb-10">
-      <h1>
-        {post.data.title}
-      </h1>
-      <div
-        class="flex flex-wrap gap-4 text-[0.95rem] font-mono text-gray-500 dark:text-gray-500 italic tracking-wide mt-4"
+  <article
+    class="prose dark:prose-invert max-w-none lg:prose-p:max-w-[80ch] lg:prose-p:mx-auto lg:prose-headings:mx-10 lg:prose-blockquote:max-w-[70ch] lg:prose-blockquote:mx-auto lg:prose-li:max-w-[78ch] lg:prose-li:mx-auto lg:prose-pre:max-w-[85ch] lg:prose-pre:mx-auto lg:prose-table:max-w-[100ch] lg:prose-table:mx-auto"
+  >
+    <h1>
+      {post.data.title}
+    </h1>
+    <div
+      class="max-w-[82ch] flex flex-wrap gap-2 text-[0.95rem] font-mono text-gray-500 dark:text-gray-500 italic tracking-wide m-auto"
+    >
+      <span
+        >Publicado em: {
+          post.data.date.toLocaleDateString("en-US", {
+            month: "2-digit",
+            day: "2-digit",
+            year: "numeric",
+          })
+        }</span
       >
-        <span
-          >Publicado em: {
-            post.data.date.toLocaleDateString("en-US", {
-              month: "2-digit",
-              day: "2-digit",
-              year: "numeric",
-            })
-          }</span
-        >
-        <span>{words} palavras · {minutes} minutos de leitura</span>
-        {
-          post.data.tags && (
-            <span class="flex gap-2">
-              {post.data.tags.map((tag: string) => (
-                <span class="text-blue-700 dark:text-brand">#{tag}</span>
-              ))}
-            </span>
-          )
-        }
-      </div>
-    </header>
-
-    <div class="prose prose-lg dark:prose-invert max-w-none mt-8">
-      <Content />
+      <span>· {words} palavras · {minutes} minutos de leitura</span>
+      {
+        post.data.tags && (
+          <span class="flex gap-2">
+            {post.data.tags.map((tag: string) => (
+              <span class="text-blue-700 dark:text-brand">#{tag}</span>
+            ))}
+          </span>
+        )
+      }
     </div>
+
+    <Content />
   </article>
 </Base>

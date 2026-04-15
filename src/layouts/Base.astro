@@ -39,6 +39,13 @@ const siteUrl = Astro.site || "https://jokenpo.dev";
     <meta property="twitter:image" content={new URL(image, siteUrl)} />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body
     class="bg-site-bg dark:bg-site-bg-dark text-site-text dark:text-site-text-dark min-h-screen flex flex-col font-sans antialiased"
