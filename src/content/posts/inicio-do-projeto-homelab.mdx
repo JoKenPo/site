@@ -1,15 +1,17 @@
 ---
 title: "O Início do Meu Projeto Homelab"
 description: "Como um hardware limitado e um vídeo no YouTube me convenceram a montar um servidor caseiro."
-date: 2026-04-14
+date: 2026-04-15
 tags: ["homelab", "raspberry-pi", "self-hosted", "rust"]
 heroImage: ""
-draft: true
+draft: false
 ---
+
+import Figure from '../../components/Figure.astro';
 
 Eu estava de bobeira no YouTube quando caí num vídeo de um cara montando um homelab minimalista. Ele usava um Raspberry Pi Zero 2W para bloquear anúncios na rede inteira, rodar uma VPN e acessar os arquivos de casa remotamente. A ideia me pegou na hora.
 
-Fui pesquisar o preço da placa e, por um golpe de sorte, encontrei um **Raspberry Pi 3 Model B** pelo mesmo valor — cerca de 50% abaixo do preço comum. Não pensei duas vezes.
+Fui pesquisar o preço da placa e, por um golpe de sorte, encontrei um **Raspberry Pi 3 Model B** pelo mesmo valor, cerca de 50% abaixo do preço comum. Não pensei duas vezes.
 
 Desde então, o projeto virou um buraco sem fundo. Comecei a subir serviços, testar ferramentas e aprender muito mais do que eu esperava. Este post é sobre esse começo e o que é possível extrair de um hardware que muitos considerariam "ultrapassado".
 
@@ -21,26 +23,41 @@ A regra aqui é clara: **tudo precisa ser leve**. Acabei priorizando ferramentas
 
 ## O Que Já Está Rodando
 
+<Figure 
+  src="https://files.jokenpo.dev/blog/2026/Casaos.avif" 
+  alt="CasaOS Dashboard" 
+  caption="CasaOS do meu RPi acessado pelo meu celular"
+  size="sm"
+/>
+
+### Sistema Operacional
+
+*   **[CasaOS](https://casaos.io/):** Acabei optando por instalá-lo como painel visual simplesmente por ser de baixo consumo e amigável, e eu ainda não conhecia muitas opções hehe. Porém, já estou estudando algumas alternativas melhores para substituí-lo no futuro.
+
 ### Infraestrutura e Rede
-Comecei pelo básico para sentir o impacto no dia a dia:
+Comecei pelo básico, influenciado pelo vídeo que vi no youtube:
 
 *   **[Pi-hole](https://pi-hole.net/):** Funciona como o DNS da minha rede. Ele corta anúncios e rastreadores direto na origem, antes mesmo de chegarem no meu navegador ou aplicativos.
-*   **[Tailscale](https://tailscale.com/):** Uma VPN baseada em WireGuard que é ridícula de fácil de configurar. Com ela, acesso minha rede interna de qualquer lugar do mundo. Além disso, consigo usar o Pi-hole mesmo no 4G, roteando o tráfego do celular pela conexão de casa.
+*   **[Tailscale](https://tailscale.com/):** Uma VPN baseada em WireGuard que é ridícula de fácil de configurar. Com ela, acesso minha rede interna de qualquer lugar do mundo. Além disso, consigo usar o Pi-hole mesmo no 4G, roteando o tráfego do celular pela conexão de casa. Existem outros, mas escolhi ele por ter uma configuração bem amigável e ter um aplicativo para android.
 
 ### Inteligência Artificial Local
 Depois, resolvi arriscar algo mais complexo:
 
 *   **[ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw/):** Um fork do OpenClaw compilado em Rust. Escolhi ele especificamente pela limitação de memória. Ele roda como um agente no meu Telegram e me ajuda com resumos de notícias, automações e até debug de código.
-*   **Antigravity-Manager:** [LINK_AQUI] — Encontrei esse projeto num fórum do Reddit 🏴‍☠️. Ele gerencia múltiplas contas e as expõe como uma API única, o que me ajuda a diluir os custos de uso pesado de tokens.
+*   **[Antigravity-Manager](https://github.com/lbjlaq/Antigravity-Manager/blob/main/README_EN.md):** Encontrei esse projeto num fórum do Reddit 🏴‍☠️. Ele gerencia múltiplas contas Google e as expõe como uma API única dos modelos de IA do Google, o que me ajuda a diminuir os custos de uso pesado de tokens.
 
-### Observabilidade e Site
-Para não navegar no escuro, precisava de métricas:
+### Observabilidade e meu Site
+Bom, agora que já tinha os serviços rodando, eu precisava de métricas e observabilidade:
 
-*   **[Beszel](https://beszel.dev/):** De longe o monitor de sistemas mais leve e completo que testei. Consigo acompanhar CPU, temperatura e o comportamento individual de cada container em tempo real.
-*   **Nginx + Cloudflare Tunnel:** Uso essa combinação para hospedar meu próprio site ([JoKenPo/site](https://github.com/JoKenPo/site)) e outros serviços sem precisar abrir portas no roteador, o que mantém a rede de casa segura.
+*   **[Beszel](https://beszel.dev/):** Foi a opção leve, completa e com um layout bacana que encontrei. Consigo acompanhar CPU, temperatura e o comportamento individual de cada container em tempo real.
+*   **Nginx + Cloudflare Tunnel:** Pra hospedar esse site eu uso essa combinação. Mantém a rede de casa segura e me permite acessar os serviços de qualquer lugar.
 
 ## Vale a pena?
 
-Na prática, o consumo se estabilizou de forma surpreendente: o Pi-hole ocupa cerca de 50MB de RAM e o ZeroClaw, quando parado, leva apenas 30MB. 
+Pra mim valeu muito, não só pelo aprendizado, mas é muito gratificante deixar de usar alguns serviços pagos, ter mais controle sobre meus dados e pagar um preço irrisório na conta de luz.
+Com as minhas configurações, o RPi consome em média 5~7W de potência, o que é praticamente nada. Somando o SSD, o consumo total fica em torno de 12W. Isso da mais ou menos 10kWh por mês, o que dá cerca de R$ 10,00 na conta de luz. 
+Claro, tem o custo de todo o aparato, mas pra mim, se pagou.
 
-Hoje, esse computadorzinho que enfeita minha mesa é responsável por limpar minha internet, proteger minha conexão e hospedar meus projetos. Se você quer aprender sobre infraestrutura, Linux e ter controle total sobre seus dados, recomendo começar agora mesmo — mesmo que seja com aquela placa velha guardada na gaveta.
+Hoje, esse computadorzinho que enfeita minha mesa é responsável por limpar minha internet, hospedar meus projetos, API de IA gratuito e consigo controlar na palma da mão. 
+
+Se ainda não te convenci a ter um HomeLab próprio, vai me acompanhando que eu te mostro o que mais da pra fazer. 😝

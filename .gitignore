@@ -6,3 +6,4 @@
 *.log
 TODO.md
 /files/
+/.astro

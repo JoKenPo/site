@@ -60,11 +60,7 @@ const recentPosts = allPosts
     <ul class="list-disc pl-5 mb-8 space-y-2">
       {
         recentPosts.map((post) => {
-          const dateStr = post.data.date.toLocaleDateString("en-US", {
-            month: "2-digit",
-            day: "2-digit",
-            year: "numeric",
-          });
+          const dateStr = post.data.date.toISOString().slice(0, 10);
           return (
             <li class="mb-2 text-gray-700 dark:text-gray-400 marker:text-gray-400 sm:flex items-baseline">
               <span class="font-bold font-mono text-[0.95rem] mr-2 text-gray-500 dark:text-gray-400 italic tracking-wide">
