@@ -1,27 +1,43 @@
 ---
-import Base from '../../layouts/Base.astro';
-import { getCollection } from 'astro:content';
-import { readingTime } from '../../utils/readingTime';
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { readingTime } from "../../utils/readingTime";
 
-const allPosts = await getCollection('posts', ({ data }) => {
+const allPosts = await getCollection("posts", ({ data }) => {
   return data.draft !== true;
 });
 
-const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = allPosts.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
-<Base title="Blog - jokenpo.dev" description="Arquivo completo de artigos e postagens técnicas.">
-  <h1>Blog Archive</h1>
-  <p class="mb-4 text-[1.1rem] text-gray-700 dark:text-gray-400">Aqui você encontra todos os meus artigos publicados, organizados dos mais recentes para os mais antigos.</p>
+<Base
+  title="Blog - jokenpo.dev"
+  description="Arquivo completo de artigos e postagens técnicas."
+>
+  <h1>Blog Articles</h1>
+  <p class="mb-4 text-[1.1rem] text-gray-700 dark:text-gray-400">
+    Se quiser acompanhar os artigos que escrevo, você pode acompanhar pelo <a
+      href="/rss.xml">RSS feed</a
+    >.
+  </p>
 
-  <ul class="list-none pl-0 mt-8 space-y-0">
-    {posts.map((post) => (
-      <li class="flex flex-col sm:flex-row sm:items-baseline sm:gap-6 mb-4 pb-4 border-b border-dashed border-gray-300 dark:border-gray-800 last:border-0 last:pb-0">
-        <span class="font-mono text-[0.95rem] text-gray-500 dark:text-gray-500 italic tracking-wide whitespace-nowrap">
-          {post.data.date.toISOString().split('T')[0]} · {readingTime(post.body).minutes} min
-        </span>
-        <a class="text-xl font-medium sm:text-[1.3rem] leading-tight flex-1 text-blue-700 hover:underline dark:text-brand" href={`/blog/${post.slug}`}>{post.data.title}</a>
-      </li>
-    ))}
+  <ul class="pl-0 mt-8 space-y-0">
+    {
+      posts.map((post) => (
+        <li class="flex flex-col sm:flex-row sm:items-baseline sm:gap-6 border-gray-300 dark:border-gray-800 last:border-0 last:pb-0">
+          <span class="font-mono text-[0.95rem] text-gray-500 dark:text-gray-500 italic tracking-wide whitespace-nowrap">
+            {post.data.date.toISOString().split("T")[0]}
+          </span>
+          <a
+            class="leading-tight flex-1 text-blue-700 hover:underline dark:text-brand"
+            href={`/blog/${post.slug}`}
+          >
+            {post.data.title}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </Base>

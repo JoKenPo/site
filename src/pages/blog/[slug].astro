@@ -31,7 +31,7 @@ const { words, minutes } = readingTime(post.body);
     >
       <span
         >Publicado em: {
-          post.data.date.toISOString().slice(0, 10)
+        post.data.date.toISOString().slice(0, 10).replace(/-/g, "/")
         }</span
       >
       <span>· {words} palavras · {minutes} minutos de leitura</span>
