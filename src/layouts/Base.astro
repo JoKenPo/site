@@ -14,6 +14,7 @@ const {
   image = "/social.png",
 } = Astro.props;
 const siteUrl = Astro.site || "https://jokenpo.dev";
+const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 
 <!doctype html>
@@ -46,6 +47,25 @@ const siteUrl = Astro.site || "https://jokenpo.dev";
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
       rel="stylesheet"
     />
+
+    {
+      gaId && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+          />
+          <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", gaId);
+          </script>
+        </>
+      )
+    }
   </head>
   <body
     class="bg-site-bg dark:bg-site-bg-dark text-site-text dark:text-site-text-dark min-h-screen flex flex-col font-sans antialiased"
