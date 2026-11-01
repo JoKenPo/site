@@ -1,4 +1,4 @@
-name: CI/CD - Build & Deploy
+name: CI - Build & Check
 
 on:
   push:
@@ -27,46 +27,6 @@ jobs:
         env:
           PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
 
-      - name: Archive build artifacts
-        if: github.ref == 'refs/heads/master'
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-files
-          path: dist/
-
-  deploy:
-    needs: build
-    if: (github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch') && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-files
-          path: dist/
-
-      - name: Tailscale Auth
-        uses: tailscale/github-action@v3
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci
-
-      - name: Deploy to Raspberry Pi
-        env:
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          PI_HOST: ${{ secrets.PI_HOST }}
-          PI_USER: ${{ secrets.PI_USER }}
-        run: |
-          # Configura a chave SSH
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_deploy
-          chmod 600 ~/.ssh/id_deploy
-
-          # Sincroniza apenas os arquivos do site
-          rsync -avz --delete \
-            --no-perms --no-owner --no-group --no-t \
-            -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_deploy" \
-            ./dist/ $PI_USER@$PI_HOST:/www/jokenpo/site/dist/
+  # Deploy agora é feito automaticamente pela Vercel via integração com o GitHub.
+  # O job de deploy para o Raspberry Pi foi removido, mas a infra Docker/Nginx
+  # permanece no repositório como fallback em docker/ para uso manual se necessário.
